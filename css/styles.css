@@ -1,0 +1,369 @@
+:root {
+    --fuente-principal: 'Lato', sans-serif;
+    --primario: #da595e;
+    --obscuro: #484848;
+    --blanco: #ffffff;
+    --negro: #000000;
+
+    --hospedaje: #275154;
+    --concierto: #da595e;
+    --clase: #598dda;
+    --paseo: #940ad4;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fuente-principal);
+}
+
+h1 {
+    font-size: 2.6rem;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.8rem;
+}
+
+/* Interfaz */
+
+.contenedor {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.hero {
+    height: 100vh;
+    background-image: url(../img/arriba.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    /* ocupe todo el espacio */
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    /* para dejar logo y nav arriba */
+    align-self: flex-start;
+    padding-top: 1rem;
+}
+
+.navegacion a{
+    color: var(--blanco);
+    text-decoration: none;
+    /* margen derecha pero el ultimo quitarlo */
+    margin-right: 1rem;
+}
+/* quitar el ultimo margen der */
+.navegacion a:last-of-type {
+    margin-right: 0;
+}
+
+.contenido-hero {
+    display: grid;
+    grid-template-columns: 5% auto 5%;
+    /* max-content para que tome el tamaño del contenido */
+    grid-template-rows: max-content auto;
+}
+.contenido-hero h1 {
+    grid-column: 2/3;
+    color: var(--blanco);
+}
+.contenido-hero form {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    /* para colocar el boton dentro del input */
+    position: relative;  
+      /*form input y form submit. Crece mucho  */
+      display: flex;
+      /* indicar largo */
+      height: 4rem;
+}
+
+/* que cresca el input lo maximo posible */
+form input[type="text"] {
+    flex: 1;
+    /* tiene border por default */
+    border: none;
+    border-radius: 10px;
+    background-image: url(../img/lupa.png);
+    background-repeat: no-repeat;
+    /* la lupa queda por default en el medio del input*/
+    /* left queda junto al input para corregir */
+    /* background-position: left center; */
+    background-position: calc(1% + .3rem) calc(1% + .8rem);
+    /* placeholder queda debajo de la lupa. para corregir */
+    padding-left: 4rem;
+    font-size: 1.6rem;
+}
+
+form input[type="submit"]{
+/* form tiene position relative, por tanto se tiene acceso al submit */
+/* Se puede posicionar el submit en absolute, queda dentro del input arriba a la izquierda */
+   position: absolute;
+/* posicionar input al lado derecho */
+   right: 1rem; 
+   top: .6rem;
+/* estilos al input */
+    padding: .7rem 2rem;
+    border: none;
+    background-color: var(--primario);
+    color: var(--blanco);
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-size: 1.2rem;    
+}
+
+form input[type="submit"]:hover{
+    cursor: pointer;
+}
+
+/* Contenido Principa */
+
+.contenedor-cards {
+    display: grid;
+    /* queda responsive aunque tenga 250px, gracias a grid y auto fit */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 2rem 0;
+}
+/* para adaptar mejor el responsive */
+.card img{
+    width: 100%;
+}
+
+.info .categoria {
+    font-size: .9rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.info .titulo {
+    font-size: 1.6rem;
+    font-weight: 900;
+    
+}
+
+.info .precio {
+    color: var(--obscuro);
+    font-size: 1.2rem;
+}
+
+/* Colores */
+.hospedaje {
+    color: var(--hospedaje);
+}
+
+.concierto {
+    color: var(--concierto);
+}
+
+.clase {
+    color: var(--clase);
+}
+.paseo {
+    color: var(--paseo);
+}
+
+/* Premium 
+imagen fondo degradado, y dentro de la imagen tiene un
+ texto y boton al lado derecho */
+
+.premium {
+    background-image: url(../img/hospedaje-pro.jpg);
+    background-repeat: no-repeat;
+    /* contenedor-cards aplica grid. En movil no se necesita 
+    aplicar grid-template-columns. quitar la config*/
+    /* herado grid y gap */
+    grid-template-columns: unset;
+    /* altura de la imagen */
+    height: 30rem;
+}
+/* si ocupo grid en desktop*/
+@media screen and (min-width: 768px) {
+    .premium {
+        grid-template-columns: auto 30%;
+    }
+    .premium .info {
+        grid-column: 2 / 3;
+    }
+}
+
+.premium .info {
+/* para tener acceso a las caracteristicas de centrado, 
+se usa flexbox */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+}
+.premium .info h3 {
+    text-align: center;
+    color: var(--blanco);
+}
+
+@media screen and (min-width: 768px) {
+    .premium .info h3 {
+        text-align: right;
+        color: var(--negro);
+    }
+}
+
+/* Boton Premium */
+.info .boton {
+    background-color: var(--blanco);
+/* link es inline, deja en block para movil ocupe todo el espacio */
+    display: block;
+    padding: 1rem;
+    color: var(--obscuro);    
+    text-decoration: none;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    -webkit-box-shadow: 8px 17px 31px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 8px 17px 31px -4px rgba(0,0,0,0.75);
+    box-shadow: 8px 17px 31px -4px rgba(0,0,0,0.75);
+    transition: all .3s ease-in-out;
+}
+
+.info .boton:hover {
+     background-color: var(--primario);
+     color: var(--blanco);
+}
+
+/* Destinos Populares */
+
+.destinos .contenedor-cards {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+}
+
+.destinos .card {
+    position: relative;
+}
+
+.destinos .info {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;       
+}
+
+.destinos .info .titulo {
+    color: var(--blanco);
+    font-size: 1.8rem;
+}
+
+/* footer */
+.footer {
+    /* se pierde pero se debe */
+    position: fixed;
+    /* dar una posición. lo deja abajo, pierde estilos */
+    bottom: -100%;
+    background-color: var(--blanco);
+    width: 100%;
+    -webkit-box-shadow: -1px -5px 5px -1px rgba(0,0,0,0.67);
+    -moz-box-shadow: -1px -5px 5px -1px rgba(0,0,0,0.67);
+    box-shadow: -1px -5px 5px -1px rgba(0,0,0,0.67);
+    transition: all .5s ease-in;
+    padding: 1rem 0;
+}
+/* clic JS agrega esta clase cambia el texto */
+/* las dos clases se dejan junto */
+.footer.activo {
+    bottom: 0;
+}
+.nav-footer {
+    padding: 1rem;
+}
+.nav-footer h3 {
+    font-size: 1.2rem;
+}
+ 
+.nav-footer a {
+    display: block;
+    margin-bottom: .5rem;
+    text-decoration: none;
+    color: var(--obscuro);
+}
+.nav-footer a:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Footer - Redes Sociales */
+
+.sociales ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex: 1 0 auto;
+    list-style: none;
+}
+
+.sociales ul li:last-of-type {
+    margin-right: 0;
+}
+.sociales ul li a {
+    font-size: 1.8rem;    
+}
+.sociales ul li a:before {
+    font-family: "Font Awesome 5 Brands";    
+}
+
+.sociales ul li a[href*='facebook.com']::before {
+    content: "\f39e";
+}
+
+.sociales ul li a[href*='twitter.com']::before {
+    content: "\f099";
+}
+
+.sociales ul li a[href*='youtube.com']::before {
+    content: "\f431";
+}
+
+.sociales ul li a[href*='instagram.com']::before {
+    content: "\f16d";
+}
+
+.sociales ul li span {
+    display: none;
+}
+
+/* boton footer */
+.btn-flotante {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: var(--blanco);
+    color: var(--obscuro);
+    padding: .5rem 2rem;
+    text-decoration: none;
+    -webkit-box-shadow: 8px 17px 31px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 8px 17px 31px -4px rgba(0,0,0,0.75);
+    box-shadow: 8px 17px 31px -4px rgba(0,0,0,0.75);
+    transition: all .3s ease-in-out;
+}
+
+.btn-flotante .activo,
+.btn-flotante:hover {
+    background-color: var(--primario);
+    color: var(--blanco);
+}
+
+
+
+
+
